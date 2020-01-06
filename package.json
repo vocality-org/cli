@@ -1,0 +1,40 @@
+{
+  "name": "vocality-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "vc": "bin/bootstrap",
+    "vocality-cli": "bin/bootstrap"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "arg": "^4.1.2",
+    "chalk": "^3.0.0",
+    "esm": "^3.2.25",
+    "execa": "^4.0.0",
+    "inquirer": "^7.0.1",
+    "listr": "^0.14.3",
+    "meow": "^6.0.0",
+    "ncp": "^2.0.0",
+    "pkg-install": "^1.0.0",
+    "replace-in-file": "^5.0.2",
+    "validate-npm-package-name": "^3.0.0"
+  },
+  "keywords": [
+    "cli",
+    "create-project"
+  ],
+  "devDependencies": {
+    "@types/inquirer": "^6.5.0",
+    "@types/listr": "^0.14.2",
+    "@types/node": "^13.1.4"
+  }
+}
