@@ -1,3 +1,5 @@
+<img width="100%" src="media/vocality-cli-logo.svg">
+
 # Vocality-CLI
 
 This is the npm command line interface for the vocality-discord-bot ecosystem. It can be used for generating new bots which are build on top of our plugin based solution.

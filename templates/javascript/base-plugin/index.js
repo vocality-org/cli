@@ -4,7 +4,9 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const options = {
-  token: process.env.DISCORD_TOKEN,
+  token: process.env.BOT_TOKEN,
+  messageCacheMaxSize: 100,
+  disabledEvents: ["TYPING_START"],
   plugins: [plugin]
 };
 

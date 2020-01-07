@@ -1,0 +1,21 @@
+{
+  "name": "plugin-setup",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bot setup including custom plugin",
+  "main": "index.ts",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@vocality-org/core": "^0.1.0",
+    "@vocality-org/types": "^0.1.0",
+    "dotenv": "^8.2.0",
+    "discord.js": "^11.5.1",
+    "ts-node": "^8.5.4"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.4"
+  }
+}
