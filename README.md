@@ -20,13 +20,13 @@ You can get both here: [Node.js and npm](https://nodejs.org/en/download/)
 Once you have everything set up just type
 
 ```shell
-npm install -g vocality-cli
+npm install -g @vocality-org/cli
 ```
 
 or if you have `npm > 5.2.0` you can use `npx` instead
 
 ```shell
-npx vocality-cli bootstrap
+npx @vocality-org/cli bootstrap
 ```
 
 After installing the cli you can use the executables _vocality-cli_ or _vc_ to trigger different commands.
