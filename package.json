@@ -1,5 +1,5 @@
 {
-  "name": "vocality-cli",
+  "name": "@vocality-org/vocality-cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,7 +13,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "author": "",
+  "author": "Matthias Herzog",
   "license": "ISC",
   "dependencies": {
     "arg": "^4.1.2",
