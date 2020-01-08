@@ -1,5 +1,5 @@
 {
-  "name": "@vocality-org/vocality-cli",
+  "name": "@vocality-org/cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
