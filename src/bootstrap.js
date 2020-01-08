@@ -9,6 +9,7 @@ import { projectInstall } from "pkg-install";
 
 const validator = require("./utils/validator");
 const chalk = require("chalk");
+const rename = require("./utils/renameClassFile");
 
 const copy = promisify(ncp);
 const replace = require("replace-in-file");
@@ -62,7 +63,6 @@ const generateTemplate = async args => {
         })
     }
   ]);
-  console.log(answers);
   await tasks.run();
   console.log("%s Project ready", chalk.green.bold("DONE"));
   return true;
@@ -74,7 +74,7 @@ const copyTemplateFiles = async (answers, options) => {
       __dirname,
       "..",
       "templates",
-      "javascript",
+      answers.template.toLowerCase(),
       "base-plugin"
     );
     return copy(
@@ -104,13 +104,13 @@ const renameFiles = async (answers, options) => {
       options.targetDirectory,
       answers.projectName,
       "my-plugin",
-      "MyPlugin.js"
+      answers.template === "JavaScript" ? "MyPlugin.js" : "MyPlugin.ts"
     ),
     path.join(
       options.targetDirectory,
       answers.projectName,
       "my-plugin",
-      className + ".js"
+      `${className}${answers.template === "JavaScript" ? ".js" : ".ts"}`
     )
   );
   fs.renameSync(
@@ -119,18 +119,14 @@ const renameFiles = async (answers, options) => {
   );
   replaceOptions = {
     files: [
-      path.join(options.targetDirectory, answers.projectName, "index.js")
+      path.join(
+        options.targetDirectory,
+        answers.projectName,
+        `index${answers.template === "JavaScript" ? ".js" : ".ts"}`
+      )
     ],
-    from: "[plugin]",
+    from: "[myPlugin]",
     to: `[${varName}]`
-  };
-  await replace(replaceOptions);
-  replaceOptions = {
-    files: [
-      path.join(options.targetDirectory, answers.projectName, "index.js")
-    ],
-    from: 'const plugin = require("./my-plugin/MyPlugin");',
-    to: `const ${varName} = require("./${answers.pluginName}/${className}");`
   };
   await replace(replaceOptions);
   replaceOptions = {
@@ -138,12 +134,17 @@ const renameFiles = async (answers, options) => {
       path.join(
         options.targetDirectory,
         answers.projectName,
-        answers.pluginName,
-        className + ".js"
+        `index${answers.template === "JavaScript" ? ".js" : ".ts"}`
       )
     ],
-    from: "MyPlugin",
-    to: `${className}`
+    from:
+      answers.template === "JavaScript"
+        ? 'const plugin = require("./my-plugin/MyPlugin");'
+        : 'import { myPlugin } from "./my-plugin/MyPlugin"',
+    to:
+      answers.template === "JavaScript"
+        ? `const ${varName} = require("./${answers.pluginName}/${className}");`
+        : `import { ${varName} } from "./${answers.pluginName}/${className}"`
   };
   await replace(replaceOptions);
   replaceOptions = {
@@ -152,19 +153,12 @@ const renameFiles = async (answers, options) => {
     to: `${answers.discordToken}`
   };
   await replace(replaceOptions);
-  replaceOptions = {
-    files: [
-      path.join(
-        options.targetDirectory,
-        answers.projectName,
-        answers.pluginName,
-        className + ".js"
-      )
-    ],
-    from: "MyPlugin()",
-    to: `${className}()`
-  };
-  await replace(replaceOptions);
+  rename.renameClassFile(
+    answers.template === "JavaScript" ? false : true,
+    className,
+    path.join(options.targetDirectory, answers.projectName, answers.pluginName),
+    false
+  );
 };
 
 const renamePluginName = (pluginName, startIndex) => {

@@ -1,3 +1,4 @@
+"use strict";
 class MyCommand {
   options = {
     id: {
@@ -5,7 +6,7 @@ class MyCommand {
       aliases: ["mc"]
     },
     description: "My first Command",
-    displayName: "myCommand",
+    usage: "myCommand",
     minArguments: 0
   };
 

@@ -10,12 +10,11 @@ class MyPlugin extends BasePlugin {
     this.commands = loadCommands(commandDefs) as Command[];
   }
 
-  load() {
+  load(guildId: string) {
     console.log("plugin was loaded");
-    return this;
   }
 
-  unload() {
+  unload(guildId: string) {
     console.log("plugin was unloaded");
   }
 }

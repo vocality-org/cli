@@ -8,7 +8,7 @@ This is the npm command line interface for the vocality-discord-bot ecosystem. I
 
 - Generate new plugins.
 - Adding new commands with boilerplate code.
-- Choose between JavaScript or TypeScript.(WIP)
+- Choose between JavaScript or TypeScript.
 
 ## Prerequisites
 

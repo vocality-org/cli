@@ -1,5 +1,6 @@
-const vocality = require('@vocality-org/core');
-const commands = require('./commands');
+"use strict";
+const vocality = require("@vocality-org/core");
+const commands = require("./commands");
 
 class MyPlugin extends vocality.BasePlugin {
   constructor() {
@@ -8,13 +9,12 @@ class MyPlugin extends vocality.BasePlugin {
     Object.keys(commands).forEach(k => this.commands.push(commands[k]));
   }
 
-  load() {
-    console.log('plugin was loaded');
-    return this;
+  load(guildId) {
+    console.log("plugin was loaded");
   }
 
-  unload() {
-    console.log('plugin was unloaded');
+  unload(guildId) {
+    console.log("plugin was unloaded");
   }
 }
 

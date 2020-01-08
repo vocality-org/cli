@@ -9,11 +9,16 @@ import fs from "fs";
 const copy = promisify(ncp);
 const replace = require("replace-in-file");
 const chalk = require("chalk");
+const rename = require("./utils/renameClassFile");
 
 const generateCommand = async args => {
   let outpath = process.cwd();
+  let ts = false;
   if (args.optArgs["--route"]) {
     outpath = path.join(process.cwd(), args.optArgs["--route"]);
+  }
+  if (args.optArgs["--typescript"]) {
+    ts = true;
   }
   const questions = [];
   questions.push({
@@ -25,22 +30,22 @@ const generateCommand = async args => {
   const tasks = new Listr([
     {
       title: "Copy command files",
-      task: () => copyCommandFile(outpath)
+      task: () => copyCommandFile(outpath, ts)
     },
     {
       title: "Changing files",
-      task: () => renameFiles(answers, outpath)
+      task: () => renameFiles(answers, outpath, ts)
     }
   ]);
   await tasks.run();
   console.log("%s Command generated", chalk.green.bold("DONE"));
 };
-const copyCommandFile = outpath => {
+const copyCommandFile = (outpath, ts) => {
   const templatedir = path.join(
     __dirname,
     "..",
     "templates",
-    "javascript",
+    ts ? "typescript" : "javascript",
     "base-command"
   );
   return copy(templatedir, outpath, {
@@ -48,31 +53,24 @@ const copyCommandFile = outpath => {
   });
 };
 
-const renameFiles = async (answers, outpath) => {
-  fs.renameSync(
-    path.join(outpath, "TestCommand.js"),
-    path.join(outpath, answers.commandName + ".js")
+const renameFiles = async (answers, outpath, ts) => {
+  rename.renameClassFile(ts, answers.commandName, outpath, true);
+  let result = fs.readFileSync(
+    path.join(outpath, ts ? "index.ts" : "index.js"),
+    {
+      encoding: "utf-8"
+    }
   );
-  let replaceOptions = {
-    files: [path.join(outpath, answers.commandName + ".js")],
-    from: "TestCommand",
-    to: `${answers.commandName}`
-  };
-  await replace(replaceOptions);
-  replaceOptions = {
-    files: [path.join(outpath, answers.commandName + ".js")],
-    from: "TestCommand()",
-    to: `${answers.commandName}()`
-  };
-  await replace(replaceOptions);
-  let result = fs.readFileSync(path.join(outpath, "index.js"), {
-    encoding: "utf-8"
-  });
-  result =
-    result.substring(0, result.indexOf("{") + 1) +
-    `\n\xa0\xa0${answers.commandName}: require('./${answers.commandName}'),` +
-    result.substring(result.indexOf("{") + 1);
-  fs.writeFileSync(path.join(outpath, "index.js"), result);
+  if (ts) {
+    result = `export * from './${answers.commandName}'; \n` + result;
+  } else {
+    result =
+      result.substring(0, result.indexOf("{") + 1) +
+      `\n\xa0\xa0${answers.commandName}: require('./${answers.commandName}'),` +
+      result.substring(result.indexOf("{") + 1);
+  }
+
+  fs.writeFileSync(path.join(outpath, ts ? "index.ts" : "index.js"), result);
 };
 
 module.exports = {

@@ -7,7 +7,7 @@ export class TestCommand extends Command {
       aliases: ["ts"]
     },
     description: "TestCommand",
-    displayName: "test",
+    usage: "test",
     minArguments: 0
   };
 

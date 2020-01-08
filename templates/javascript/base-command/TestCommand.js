@@ -1,3 +1,4 @@
+"use strict";
 class TestCommand {
   options = {
     id: {
@@ -5,7 +6,7 @@ class TestCommand {
       aliases: ["ts"]
     },
     description: "TestCommand",
-    displayName: "test",
+    usage: "test",
     minArguments: 0
   };
 

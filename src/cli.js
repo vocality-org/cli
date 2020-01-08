@@ -36,13 +36,12 @@ export function cli(args) {
       -t, --typescript   optional for generate. When set, a command with typescript support is generated
   `
   );
-  splashScreen.generateSplashScreen();
+
   command.optArgs._.push(...Object.keys(command.optArgs));
   command.optArgs._.splice(
     command.optArgs._.findIndex(c => c === "_"),
     1
   );
-
   switch (command.optArgs._[0]) {
     case "bootstrap":
       bootstrap.generateTemplate(argValues);
@@ -54,9 +53,11 @@ export function cli(args) {
       console.log(cli.pkg.version);
       break;
     case "--help":
+      splashScreen.generateSplashScreen();
       console.log(cli.help);
       break;
     default:
+      splashScreen.generateSplashScreen();
       console.log(cli.help);
       break;
   }

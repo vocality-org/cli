@@ -1,12 +1,13 @@
+"use strict";
 class MyOtherCommand {
   options = {
     id: {
-      name: 'moc', // command identifier
-    },
+      name: "moc" // command identifier
+    }
   };
 
   execute(msg, args) {
-    msg.reply('thanks you for executing my other command');
+    msg.reply("thanks you for executing my other command");
   }
 }
 

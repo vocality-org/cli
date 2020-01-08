@@ -1,4 +1,5 @@
+"use strict";
 module.exports = {
-  MyCommand: require('./MyCommand'),
-  MyOtherCommand: require('./MyOtherCommand'),
+  MyCommand: require("./MyCommand"),
+  MyOtherCommand: require("./MyOtherCommand")
 };
