@@ -30,7 +30,7 @@ export function cli(args) {
     Commands:
           bootstrap [-r, --route]                    start the routine for a new project
           generate  [-r, --route] [-t, --typescript] generates a new command
-          docs      [-r, --route]                    generates a command.json file, is used for generating documentation for your plugin on our landing page
+          docs      [-r, --route]                    generates a commands.json file, is used for generating documentation for your plugin on our landing page
           -h, --help                                 show usage information
           -v, --version                              print version info
     optional parameters:

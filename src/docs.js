@@ -28,7 +28,7 @@ const generateDocs = async args => {
       task: () => (files = searchForCommands(commandsPath))
     },
     {
-      title: "generating command.json",
+      title: "generating commands.json",
       task: () => excute(files, inPath, commandsPath)
     }
   ]);

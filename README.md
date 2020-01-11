@@ -1,4 +1,4 @@
-<img width="100%" src="media/vocality-cli-logo.svg">
+<img width="100%" src="https://raw.githubusercontent.com/vocality-org/cli/master/media/vocality-cli-logo.svg?sanitize=true">
 
 # Vocality-CLI
 
@@ -44,7 +44,7 @@ vocality-cli [command] [optional parameters]
 - **generate**
   Generates a new command in an existing vocality plugin project.
 - **docs**
-  Generates a command.json file, is mandatory for generating documentation for your plugin on our landing page
+  Generates a commands.json file, is mandatory for generating documentation for your plugin on our landing page
 - **-v, --version**
   Displays the current version of the cli.
 - **-h, --help**
