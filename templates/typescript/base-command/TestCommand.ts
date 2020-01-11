@@ -1,4 +1,5 @@
 import { Command, CommandOptions } from "@vocality-org/types";
+import { Message } from "discord.js";
 
 export class TestCommand extends Command {
   options: CommandOptions = {
@@ -8,10 +9,14 @@ export class TestCommand extends Command {
     },
     description: "TestCommand",
     usage: "test",
-    minArguments: 0
+    minArguments: 0,
+    example: {
+      input: "ping",
+      output: "pong"
+    }
   };
 
-  execute(msg, args) {
+  execute(msg: Message, args: string[]) {
     msg.reply("thanks you for executing my command");
   }
 }

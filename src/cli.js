@@ -2,6 +2,7 @@
 import arg from "arg";
 const bootstrap = require("./bootstrap");
 const generate = require("./generate");
+const docs = require("./docs");
 const meow = require("meow");
 const splashScreen = require("./utils/splashscreen");
 
@@ -28,11 +29,12 @@ export function cli(args) {
   
     Commands:
           bootstrap [-r, --route]                    start the routine for a new project
-          generate  [-r, --route] [-t, --typescript] generate a new command
+          generate  [-r, --route] [-t, --typescript] generates a new command
+          docs      [-r, --route]                    generates a command.json file, is used for generating documentation for your plugin on our landing page
           -h, --help                                 show usage information
           -v, --version                              print version info
     optional parameters:
-      -r, --route        optional for bootstrap and generate. enter a path relative to where the command is executed
+      -r, --route        optional for bootstrap, generate and docs. enter a path relative to where the command is executed
       -t, --typescript   optional for generate. When set, a command with typescript support is generated
   `
   );
@@ -48,6 +50,9 @@ export function cli(args) {
       break;
     case "generate":
       generate.generateCommand(argValues);
+      break;
+    case "docs":
+      docs.generateDocs(argValues);
       break;
     case "--version":
       console.log(cli.pkg.version);

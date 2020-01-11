@@ -5,6 +5,10 @@ export class MyOtherCommand implements Command {
   options: CommandOptions = {
     id: {
       name: "moc" // command identifier
+    },
+    example: {
+      input: "ping",
+      output: "pong"
     }
   };
 

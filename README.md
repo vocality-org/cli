@@ -43,6 +43,8 @@ vocality-cli [command] [optional parameters]
   Sets up a boilerplate project to develop a new plugin for a bot.
 - **generate**
   Generates a new command in an existing vocality plugin project.
+- **docs**
+  Generates a command.json file, is mandatory for generating documentation for your plugin on our landing page
 - **-v, --version**
   Displays the current version of the cli.
 - **-h, --help**
@@ -51,6 +53,6 @@ vocality-cli [command] [optional parameters]
 ### Optional parameters
 
 - **-r, --route**
-  Optional parameter for **bootstrap** and **generate**. Used for entering a custom path relative to where the command is executed.
+  Optional parameter for **bootstrap**, **generate** and **docs**. Used for entering a custom path relative to where the command is executed.
 - **-t, --typescript**
   Optional parameter for **generate**. When set, a command with typescript support is generated.
