@@ -28,7 +28,7 @@
     "meow": "^6.0.0",
     "ncp": "^2.0.0",
     "pkg-install": "^1.0.0",
-    "replace-in-file": "^5.0.2",
+    "replace-in-file": "^6.0.0",
     "validate-npm-package-name": "^3.0.0",
     "vm2": "^3.8.4"
   },
